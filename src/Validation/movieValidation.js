@@ -3,14 +3,6 @@ const validFileExtensions = {
   image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
 };
 
-const maxFileSize = 102400;
-
-function isValidFileType(fileName, fileType) {
-  return (
-    fileName &&
-    validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1
-  );
-}
 const currentYear = new Date().getFullYear();
 
 export const movieValidation = Yup.object().shape({
