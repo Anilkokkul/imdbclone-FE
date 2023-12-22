@@ -56,7 +56,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="register">
+      <div className="register ">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/863px-IMDB_Logo_2016.svg.png"
           alt="logo"
