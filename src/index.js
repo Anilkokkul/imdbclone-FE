@@ -1,14 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import ActorContextProvider from "./context/actorContext";
+import MovieContextProvider from "./context/allMoviesContext";
+import ProducerContextProvider from "./context/produceContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ProducerContextProvider>
+    <MovieContextProvider>
+      <ActorContextProvider>
+        <App />
+      </ActorContextProvider>
+    </MovieContextProvider>
+  </ProducerContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
