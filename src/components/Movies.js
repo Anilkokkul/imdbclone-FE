@@ -29,7 +29,7 @@ function Movies() {
                   <div>Year : {movie.yearOfRelease}</div>
                   <p className="mt-2 opacity-50">{movie.plot}</p>
                   <div className="font-extrabold tracking-widest mt-2">
-                    Produder
+                    Producer
                   </div>
                   <p>{movie.producer.name}</p>
                   <div className="font-extrabold tracking-widest mt-2">

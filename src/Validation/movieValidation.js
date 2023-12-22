@@ -1,7 +1,4 @@
 import * as Yup from "yup";
-const validFileExtensions = {
-  image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
-};
 
 const currentYear = new Date().getFullYear();
 
