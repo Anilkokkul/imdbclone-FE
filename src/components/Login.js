@@ -54,6 +54,7 @@ const Login = () => {
             <b>Password</b>{" "}
           </label>
           <input
+          className="text-black"
             type="password"
             placeholder="at least 8 characters"
             name="password"
