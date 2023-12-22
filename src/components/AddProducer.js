@@ -1,11 +1,12 @@
 import React from "react";
-
+import { useProducers } from "../context/produceContext";
 import { instance } from "../App";
 import { actorValidation } from "../Validation/actorValidation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toastSuccess, errorToast } from "../services/toast";
 
 function AddProducer({ setModel }) {
+  const { fetchProducer } = useProducers();
   const initialValues = {
     name: "",
     gender: "",
@@ -32,8 +33,8 @@ function AddProducer({ setModel }) {
                 instance
                   .post("/producer", values)
                   .then((data) => {
-                    console.log(data);
                     toastSuccess(data.data.message);
+                    fetchProducer();
                   })
                   .catch((data) => {
                     console.log(data);

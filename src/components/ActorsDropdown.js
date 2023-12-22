@@ -7,6 +7,10 @@ function ActorsDropdown({ onChange, defaultValue, actors }) {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
+    fetchActor();
+  }, []);
+
+  function fetchActor() {
     instance
       .get("/actor")
       .then((response) => {
@@ -19,9 +23,10 @@ function ActorsDropdown({ onChange, defaultValue, actors }) {
       .catch((error) => {
         console.error("Error fetching actors:", error);
       });
-  }, []);
+  }
 
   const handleChange = (e) => {
+    fetchActor();
     onChange(e);
   };
 

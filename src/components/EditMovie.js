@@ -9,46 +9,61 @@ import Addactor from "./Addactor";
 import AddProducer from "./AddProducer";
 import { useMovies } from "../context/allMoviesContext";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useActors } from "../context/actorContext";
+import { useProducers } from "../context/produceContext";
 
 function EditMovie() {
+  const { fetchActor } = useActors();
+  const { fetchProducer } = useProducers();
   const [movieData, setMovieData] = useState({});
-  const { moviesData } = useMovies();
+  const { moviesData, fetchMovies } = useMovies();
   const [actorsID, setActorsID] = useState([]);
   const [producerId, setProducerId] = useState("");
   const [actorModel, setActorModel] = useState(false);
   const [producerModel, setProducerModel] = useState(false);
   console.log(movieData);
   const { id } = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
       const editMovie = moviesData.find((movie) => movie._id === id);
+      const actorEdit = editMovie?.actors.map((actor) => ({
+        label: actor.name,
+        value: actor._id,
+      }));
+      const producerEdit = {
+        label: editMovie?.producer.name,
+        value: editMovie?.producer._id,
+      };
+      console.log(producerEdit);
       setMovieData(editMovie || {});
-      setActorsID(editMovie?.actors || []);
-      setProducerId(editMovie?.producer || "");
+      setActorsID(actorEdit || []);
+      setProducerId(producerEdit || "");
     }, 3000);
   }, [moviesData, id]);
 
   const initialValues = {
     title: movieData.title || "",
-    yearOfRelease: "",
-    genre: "",
-    plot: "",
+    yearOfRelease: movieData.yearOfRelease || "",
+    genre: movieData.genre || "",
+    plot: movieData.plot || "",
     actors: [],
-    producer: "",
+    producer: producerId || "",
   };
   return (
     <div>
       <div className=" p-6 flex items-center justify-start flex-col w-4/5 mx-auto">
         <h1 className="text-3xl text-center mb-3">Add a Movie</h1>
         <Formik
+          enableReinitialize
           initialValues={initialValues}
           validationSchema={movieValidation}
           onSubmit={(values, { resetForm }) => {
             console.log("values::", producerId);
             const aIds = actorsID.map((i) => i.value);
             instance
-              .post("/movie", {
+              .put(`/movie/${id}`, {
                 ...values,
                 actors: aIds,
                 producer: producerId.value,
@@ -56,6 +71,10 @@ function EditMovie() {
               .then((data) => {
                 console.log(data);
                 toastSuccess(data.data.message);
+                navigate("/");
+                fetchMovies();
+                fetchActor();
+                fetchProducer();
               })
               .catch((data) => {
                 console.log(data);
@@ -64,6 +83,7 @@ function EditMovie() {
             setActorsID([]);
             setProducerId({});
             resetForm();
+            navigate("/");
           }}
         >
           {() => (

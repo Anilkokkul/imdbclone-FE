@@ -9,6 +9,9 @@ const ProducerContextProvider = ({ children }) => {
   const [producersData, setProducersData] = useState([]);
 
   useEffect(() => {
+    fetchProducer();
+  }, []);
+  function fetchProducer() {
     instance
       .get("/producer")
       .then((data) => {
@@ -18,10 +21,11 @@ const ProducerContextProvider = ({ children }) => {
       .catch((data) => {
         console.log("Error", data);
       });
-  }, []);
-
+  }
   return (
-    <producerContext.Provider value={{ producersData, setProducersData }}>
+    <producerContext.Provider
+      value={{ producersData, setProducersData, fetchProducer }}
+    >
       {children}
     </producerContext.Provider>
   );

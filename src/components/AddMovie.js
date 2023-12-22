@@ -7,8 +7,14 @@ import ActorsDropdown from "./ActorsDropdown";
 import ProducersDropdown from "./ProducersDropdown";
 import Addactor from "./Addactor";
 import AddProducer from "./AddProducer";
+import { useMovies } from "../context/allMoviesContext";
+import { useActors } from "../context/actorContext";
+import { useProducers } from "../context/produceContext";
 
 function AddMovie() {
+  const { fetchActor } = useActors();
+  const { fetchMovies } = useMovies();
+  const { fetchProducer } = useProducers();
   const [actorsID, setActorsID] = useState([]);
   const [producerId, setProducerId] = useState("");
   const [actorModel, setActorModel] = useState(false);
@@ -37,11 +43,12 @@ function AddMovie() {
               producer: producerId.value,
             })
             .then((data) => {
-              console.log(data);
               toastSuccess(data.data.message);
+              fetchMovies();
+              fetchActor();
+              fetchProducer();
             })
             .catch((data) => {
-              console.log(data);
               errorToast(data.response.data.message);
             });
           setActorsID([]);
@@ -141,7 +148,6 @@ function AddMovie() {
                     producer={producerId}
                     onChange={(selectedOption) => {
                       setProducerId(selectedOption);
-                      console.log(selectedOption);
                     }}
                   />
                   <div

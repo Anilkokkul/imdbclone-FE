@@ -5,14 +5,13 @@ import AddActor from "./Addactor";
 function Actors() {
   const { actorsData } = useActors();
   const [model, setModel] = useState(false);
-  console.log(actorsData);
   const showModel = () => {
     setModel(!model);
   };
 
   return (
-    <div className=" p-4">
-      <div className="text-4xl  font-bold text-center my-3 heading">
+    <div className=" p-4 ">
+      <div className="text-4xl font-bold text-center my-3 heading ">
         All Actors
       </div>
       <div>

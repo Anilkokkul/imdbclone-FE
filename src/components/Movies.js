@@ -31,7 +31,7 @@ function Movies() {
                   <div className="font-extrabold tracking-widest mt-2">
                     Producer
                   </div>
-                  <p>{movie.producer.name}</p>
+                  <p>{movie.producer.name && movie.producer.name}</p>
                   <div className="font-extrabold tracking-widest mt-2">
                     Starring
                   </div>
@@ -39,7 +39,7 @@ function Movies() {
                     {movie.actors.map((actor, i) => {
                       return (
                         <span key={i} className="text-slate-100 tracking-wide">
-                          {actor.name},
+                          {actor.name && actor.name},
                         </span>
                       );
                     })}

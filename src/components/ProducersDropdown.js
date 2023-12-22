@@ -6,6 +6,10 @@ import { instance } from "../App";
 function ProducersDropdown({ onChange, producer }) {
   const [options, setOptions] = useState([]);
   useEffect(() => {
+    fetchProducer()
+  }, []);
+
+  function fetchProducer(){
     instance
       .get("/producer")
       .then((response) => {
@@ -18,7 +22,12 @@ function ProducersDropdown({ onChange, producer }) {
       .catch((error) => {
         console.error("Error fetching producers:", error);
       });
-  }, []);
+  }
+
+  const handleChange = (e) => {
+    fetchProducer();
+    onChange(e);
+  };
 
 
   return (
@@ -26,7 +35,7 @@ function ProducersDropdown({ onChange, producer }) {
       className=" w-2/3 rounded-lg text-black"
       options={options}
       placeholder="Select producer..."
-      onChange={onChange}
+      onChange={handleChange}
       value={producer}
       isSearchable
       isClearable

@@ -1,11 +1,13 @@
 import React from "react";
-
+import { useActors } from "../context/actorContext";
 import { instance } from "../App";
 import { actorValidation } from "../Validation/actorValidation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toastSuccess, errorToast } from "../services/toast";
 
 function Addactor({ setModel }) {
+  const { fetchActor } = useActors();
+
   const initialValues = {
     name: "",
     gender: "",
@@ -34,13 +36,14 @@ function Addactor({ setModel }) {
                 instance
                   .post("/actor", values)
                   .then((data) => {
-                    console.log(data);
                     toastSuccess(data.data.message);
+                    fetchActor();
                   })
                   .catch((data) => {
                     console.log(data);
                     errorToast(data.response.data.message);
                   });
+
                 setModel(false);
                 resetForm();
               }}

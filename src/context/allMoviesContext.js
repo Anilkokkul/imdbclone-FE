@@ -9,6 +9,10 @@ const MovieContextProvider = ({ children }) => {
   const [moviesData, setMoviesData] = useState([]);
 
   useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  function fetchMovies() {
     instance
       .get("/movie/all")
       .then((data) => {
@@ -17,10 +21,10 @@ const MovieContextProvider = ({ children }) => {
       .catch((data) => {
         console.log("Error", data);
       });
-  }, []);
+  }
 
   return (
-    <movieContext.Provider value={{ moviesData, setMoviesData }}>
+    <movieContext.Provider value={{ moviesData, setMoviesData, fetchMovies }}>
       {children}
     </movieContext.Provider>
   );
