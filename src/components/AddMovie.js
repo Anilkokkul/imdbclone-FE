@@ -34,7 +34,6 @@ function AddMovie() {
         initialValues={initialValues}
         validationSchema={movieValidation}
         onSubmit={(values, { resetForm }) => {
-          console.log("values::", producerId);
           const aIds = actorsID.map((i) => i.value);
           instance
             .post("/movie", {
