@@ -52,7 +52,7 @@ function Movies() {
                     >
                       <FaRegEdit className="w-full h-full" />
                     </button>
-                    <span class="absolute font-extrabold z-10 right-[0px] bottom-11 scale-0 transition-all rounded-3xl bg-yellow-400 p-2  text-black group-hover:scale-100">
+                    <span className="absolute font-extrabold z-10 right-[0px] bottom-11 scale-0 transition-all rounded-3xl bg-yellow-400 p-2  text-black group-hover:scale-100">
                       Edit Movie
                     </span>
                   </div>
