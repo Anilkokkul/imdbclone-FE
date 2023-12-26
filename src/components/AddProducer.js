@@ -4,8 +4,10 @@ import { instance } from "../App";
 import { actorValidation } from "../Validation/actorValidation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toastSuccess, errorToast } from "../services/toast";
+import { useNavigate } from "react-router-dom";
 
 function AddProducer({ setModel }) {
+  const navigate = useNavigate();
   const { fetchProducer } = useProducers();
   const initialValues = {
     name: "",
@@ -33,12 +35,17 @@ function AddProducer({ setModel }) {
                 instance
                   .post("/producer", values)
                   .then((data) => {
+                    // console.log(data.data.message);
                     toastSuccess(data.data.message);
                     fetchProducer();
                   })
                   .catch((data) => {
-                    console.log(data);
-                    errorToast(data.response.data.message);
+                    const message = data.response.data.message;
+                    if (!message === "Failed to authenticate") {
+                      errorToast(message);
+                    }
+                    errorToast("You are not logged in Please login...");
+                    navigate("/login");
                   });
                 setModel(false);
                 resetForm();

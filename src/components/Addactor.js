@@ -4,10 +4,11 @@ import { instance } from "../App";
 import { actorValidation } from "../Validation/actorValidation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toastSuccess, errorToast } from "../services/toast";
+import { useNavigate } from "react-router-dom";
 
 function Addactor({ setModel }) {
   const { fetchActor } = useActors();
-
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     gender: "",
@@ -40,10 +41,13 @@ function Addactor({ setModel }) {
                     fetchActor();
                   })
                   .catch((data) => {
-                    console.log(data);
-                    errorToast(data.response.data.message);
+                    const message = data.response.data.message;
+                    if (!message === "Failed to authenticate") {
+                      errorToast(message);
+                    }
+                    errorToast("You are not logged in Please login...");
+                    navigate("/login");
                   });
-
                 setModel(false);
                 resetForm();
               }}

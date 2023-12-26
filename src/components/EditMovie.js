@@ -77,13 +77,16 @@ function EditMovie() {
                 fetchProducer();
               })
               .catch((data) => {
-                console.log(data);
-                errorToast(data.response.data.message);
+                const message = data.response.data.message;
+                if (!message === "Failed to authenticate") {
+                  errorToast(message);
+                }
+                errorToast("You are not logged in Please login...");
+                navigate("/login");
               });
             setActorsID([]);
             setProducerId({});
             resetForm();
-            navigate("/");
           }}
         >
           {() => (
@@ -199,7 +202,7 @@ function EditMovie() {
                 type="submit"
                 className=" bg-yellow-400 p-7 font-bold my-3 py-1 relative left-1/2 rounded-lg text-black "
               >
-                Add Movie
+                Update Details
               </button>
             </Form>
           )}

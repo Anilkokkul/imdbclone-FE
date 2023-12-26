@@ -19,8 +19,13 @@ function Navbar() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className=" w-md-16">
-        <Link to={"/login"}>Login</Link>
+      <div>
+        <button className=" bg-yellow-400 hover:bg-yellow-300 font-bold py-1 px-4 rounded text-black">
+          <Link to={"/login"}>Login</Link>
+        </button>
+        <button className=" bg-yellow-400 hover:bg-yellow-300 font-bold py-1 px-4 rounded text-black ml-2">
+          <Link to={"/register"}>Sign Up</Link>
+        </button>
       </div>
     </div>
   );

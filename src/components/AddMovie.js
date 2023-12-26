@@ -10,8 +10,10 @@ import AddProducer from "./AddProducer";
 import { useMovies } from "../context/allMoviesContext";
 import { useActors } from "../context/actorContext";
 import { useProducers } from "../context/produceContext";
+import { useNavigate } from "react-router-dom";
 
 function AddMovie() {
+  const navigate = useNavigate();
   const { fetchActor } = useActors();
   const { fetchMovies } = useMovies();
   const { fetchProducer } = useProducers();
@@ -48,7 +50,12 @@ function AddMovie() {
               fetchProducer();
             })
             .catch((data) => {
-              errorToast(data.response.data.message);
+              const message = data.response.data.message;
+              if (!message === "Failed to authenticate") {
+                errorToast(message);
+              }
+              errorToast("You are not logged in Please login...");
+              navigate("/login");
             });
           setActorsID([]);
           setProducerId({});
