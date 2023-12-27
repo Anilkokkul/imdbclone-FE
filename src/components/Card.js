@@ -10,7 +10,7 @@ function Card({ actor }) {
   };
 
   return (
-    <div className=" p-3 rounded-lg m-2 bg-slate-900 hover:scale-110">
+    <div className="transition duration-400 ease-in-out p-3 rounded-lg m-2 bg-slate-900 hover:scale-110">
       <h1 className=" text-center text-4xl font-bold mb-4">{actor.name}</h1>
       {actor.bio && <p className=" opacity-70"> {actor.bio}</p>}
       {actor.movies.length > 0 ? (

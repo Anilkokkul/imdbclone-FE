@@ -20,7 +20,7 @@ function Movies() {
               return (
                 <div
                   key={movie._id}
-                  className="flex flex-col rounded-lg shadow-md overflow-hidden p-3 bg-slate-900 hover:scale-110 relative "
+                  className="transition duration-400 ease-in-out flex flex-col rounded-lg shadow-md overflow-hidden p-3 bg-slate-900 hover:scale-110 relative "
                 >
                   <div className=" lg:text-3xl font-extrabold tracking-wider ">
                     {movie.title}
