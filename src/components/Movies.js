@@ -62,7 +62,9 @@ function Movies() {
           </div>
         </div>
       ) : (
-        <div className=" md:text-7xl text-center mt-40">Loading...</div>
+        <div className=" md:text-7xl text-center mt-40 flex justify-center items-center">
+          <div className="spinner"></div>
+        </div>
       )}
     </div>
   );

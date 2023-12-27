@@ -13,7 +13,9 @@ function Producers() {
   };
   return (
     <div className=" p-4">
-      <h2 className="text-4xl  font-bold text-center my-3 heading">All Producers</h2>
+      <h2 className="text-4xl  font-bold text-center my-3 heading">
+        All Producers
+      </h2>
       {producersData.length > 0 ? (
         <div>
           <hr className="w-full opacity-40" />
@@ -31,7 +33,9 @@ function Producers() {
           {model && <AddProducer setModel={setModel} />}
         </div>
       ) : (
-        <div className=" md:text-7xl text-center mt-40">Loading...</div>
+        <div className=" md:text-7xl text-center mt-40 flex justify-center items-center">
+          <div className="spinner"></div>
+        </div>
       )}
     </div>
   );
